@@ -1,3 +1,5 @@
+export default templateData => {
+
 const generatePage = (name, github) => {
     return `
         <!DOCTYPE html>
@@ -17,4 +19,4 @@ const generatePage = (name, github) => {
         `;
 };
 
-module.exports = generatePage;
+};
