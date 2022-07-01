@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
-// import fs from 'fs';
-// import generatePage from './src/page-template.js';
+import fs from 'fs';
+import generatePage from './src/page-template.js';
 
 // const pageHTML =  generatePage(name, github);
 
@@ -85,7 +85,7 @@ const promptProject = portfolioData => {
         },
         {
             type: 'input',
-            name: 'desctiption',
+            name: 'description',
             message: 'Provide a description of the project (Required)',
             validate: descriptionInput => {
                 if (descriptionInput) {
@@ -137,6 +137,14 @@ const promptProject = portfolioData => {
     });
 };
 
-promptUser().then(promptProject).then(portfolioData => {
-    console.log(portfolioData);
+promptUser()
+    .then(promptProject)
+    .then(portfolioData => {
+         const pageHTML = generatePage(portfolioData);
+
+    fs.writeFile('./index.html', pageHTML, err => {
+      if (err) throw new Error(err);
+
+    //   console.log('Page created! Check out index.html in this directory to see it!');
+    });
 });
